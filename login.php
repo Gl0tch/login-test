@@ -1,8 +1,8 @@
 <?php
-
+// Connexion à la base de données (exemple, à adapter selon votre configuration)
 $servername = "localhost";
 $username = "root";
-$password = "qwerty";
+$password = "";
 $dbname = "mydatabase";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,7 +19,9 @@ $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'"
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "Login successful!";
+    while($row = $result->fetch_assoc()) {
+        echo "Username: " . $row["username"]. " - Password: " . $row["password"]. "<br>";
+    }
 } else {
     echo "Invalid username or password.";
 }
